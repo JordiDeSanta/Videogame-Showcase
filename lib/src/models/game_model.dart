@@ -1,5 +1,5 @@
 class Games {
-    List<Game> items = new List();
+  List<Game> items = new List();
 
   Games();
 
@@ -84,39 +84,39 @@ class Game {
     this.checksum,
   });
 
-   Game.fromJsonMap(Map<String, dynamic> json) {
+  Game.fromJsonMap(Map<String, dynamic> json) {
     id = json['id'];
-    ageRatings= json['age_ratings'];
-    alternativeNames= json['alternative_names'];
-    category= json['category'];
-    collection= json['collection'];
-    cover= json['icoverd'];
-    createdAt= json['createdAt'];
-    externalGames= json['externalGames'];
-    firstReleaseDate= json['first_release_date'];
-    follows= json['follows'];
-    franchise= json['franchise'];
-    franchises= json['franchises'];
-    gameModes= json['game_modes'];
-    genres= json['genres'];
-    involvedCompanies= json['involved_companies'];
-    keywords= json['keywords'];
-    name= json['name'];
-    platforms= json['platforms'];
-    playerPerspectives= json['player_perspectives'];
-    rating= json['rating'];
-    ratingCount= json['rating_count'];
-    releaseDates= json['release_dates'];
-    similarGames= json['similar_games'];
-    slug= json['slug'];
-    summary= json['summary'];
-    tags= json['tags'];
-    themes= json['themes'];
-    totalRating= json['total_rating'];
-    totalRatingCount= json['total_rating_count'];
-    updatedAt= json['updated_at'];
-    url= json['url'];
-    websites= json['websites'];
-    checksum= json['checksum'];
+    ageRatings = json['age_ratings'];
+    alternativeNames = json['alternative_names'];
+    category = json['category'];
+    collection = json['collection'];
+    cover = json['icoverd'];
+    createdAt = json['createdAt'];
+    externalGames = json['external_games'].List<int>();
+    firstReleaseDate = json['first_release_date'];
+    follows = json['follows'];
+    franchise = json['franchise'];
+    franchises = json['franchises'];
+    gameModes = json['game_modes'];
+    genres = json['genres'];
+    involvedCompanies = json['involved_companies'];
+    keywords = json['keywords'];
+    name = json['name'];
+    platforms = json['platforms'];
+    playerPerspectives = json['player_perspectives'];
+    rating = json['rating'];
+    ratingCount = json['rating_count'];
+    releaseDates = json['release_dates'];
+    similarGames = json['similar_games'];
+    slug = json['slug'];
+    summary = json['summary'];
+    tags = json['tags'];
+    themes = json['themes'];
+    totalRating = json['total_rating'];
+    totalRatingCount = json['total_rating_count'];
+    updatedAt = json['updated_at'];
+    url = json['url'];
+    websites = json['websites'];
+    checksum = json['checksum'];
   }
 }

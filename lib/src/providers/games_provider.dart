@@ -1,26 +1,25 @@
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+
+import 'package:igdb_client/igdb_client.dart';
 
 import 'package:videogames/src/models/game_model.dart';
 
 class GamesProvider {
-  String _clientID = 'd3vjcma7d8t76qzaebvm0jaxo0wgy3';
-  String _authorization = 'Bearer uvcnmz9j4n0jphaz0opfn5dfyw45hk';
-  String _url = 'https://api.igdb.com/v4';
-
   Future<List<Game>> getGames() async {
-    final url = Uri.https(_url, '/games', {
-      'Client-ID' : _clientID,
-      'Authorization' : _authorization
-    });
+    var token = await IGDBClient.getOauthToken(
+        'd3vjcma7d8t76qzaebvm0jaxo0wgy3', 'wygtzdzqshpkwvpwjm5khea7awdx2j');
 
-    final resp = await http.get(url);
-    final decodedData = json.decode(resp.body);
+    var client = new IGDBClient(
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.192 Safari/537.36',
+        'd3vjcma7d8t76qzaebvm0jaxo0wgy3',
+        token.accessToken,
+        logger: IGDBConsoleLogger());
 
-    final games = new Games.fromJsonList(decodedData);
-
-    return games.items;
+    // Find games with 'infamous' in their name and return
+    // the results' name and expand their release_dates and platforms.
+    var gamesResponse = await client.games(new IGDBRequestParameters(
+        search: 'infamous',
+        fields: ['name', 'release_dates.*', 'platforms.*']));
+    print(gamesResponse);
   }
 }

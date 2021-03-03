@@ -23,6 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  igdb_client: ^0.0.7
   flutter_swiper: ^1.1.6
   http: ^0.12.2
 

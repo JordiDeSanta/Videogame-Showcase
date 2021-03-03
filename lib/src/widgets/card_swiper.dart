@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:videogames/src/models/game_model.dart';
 
