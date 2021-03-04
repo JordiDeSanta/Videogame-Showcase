@@ -36,6 +36,7 @@ class HomePage extends StatelessWidget {
       future: gamesProvider.getGames(),
       builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
         if (snapshot.hasData) {
+        
           return CardSwiperWidget(games: snapshot.data);
         } else {
           return Container(

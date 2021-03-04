@@ -1,10 +1,34 @@
 import 'dart:async';
-
+import 'dart:convert';
 import 'package:igdb_client/igdb_client.dart';
 
 import 'package:videogames/src/models/game_model.dart';
 
 class GamesProvider {
+  List<String> fields = [
+    'id',
+    'age_ratings',
+    'category',
+    'created_at',
+    'first_release_date',
+    'genres',
+    'involved_companies',
+    'name',
+    'platforms',
+    'release_dates',
+    'screenshots',
+    'similar_games',
+    'slug',
+    'summary',
+    'tags',
+    'themes',
+    'total_rating',
+    'total_rating_count',
+    'checksum',
+    'status',
+    'artworks',
+  ];
+
   Future<List<Game>> getGames() async {
     var token = await IGDBClient.getOauthToken(
         'd3vjcma7d8t76qzaebvm0jaxo0wgy3', 'wygtzdzqshpkwvpwjm5khea7awdx2j');
@@ -15,11 +39,24 @@ class GamesProvider {
         token.accessToken,
         logger: IGDBConsoleLogger());
 
-    // Find games with 'infamous' in their name and return
-    // the results' name and expand their release_dates and platforms.
-    var gamesResponse = await client.games(new IGDBRequestParameters(
+    var gamesResponse = await client.games(
+      new IGDBRequestParameters(
         search: 'infamous',
-        fields: ['name', 'release_dates.*', 'platforms.*']));
-    print(gamesResponse);
+        fields: fields,
+        limit: 1,
+      ),
+    );
+
+    final decodedData = json.decode(gamesResponse.toJson());
+
+    final games = new Games.fromJsonList(decodedData['data']);
+
+    print(games.items);
+
+    return games.items;
+  }
+
+  printResponse(IGDBResponse resp) {
+    print(IGDBHelpers.getPrettyStringFromMap(resp.toMap()));
   }
 }
