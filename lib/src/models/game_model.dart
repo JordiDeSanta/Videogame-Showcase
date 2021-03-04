@@ -65,22 +65,22 @@ class Game {
     category = json['category'];
     createdAt = json['created_at'];
     firstReleaseDate = json['first_release_date'];
-    genres = json['genres'].cast<int>();
-    involvedCompanies = json['involved_companies'].cast<int>();
+    genres = json['genres']?.cast<int>();
+    involvedCompanies = json['involved_companies']?.cast<int>();
     name = json['name'];
-    platforms = json['platforms'].cast<int>();
-    releaseDates = json['release_dates'].cast<int>();
-    screenshots = json['screenshots'].cast<int>();
-    similarGames = json['similar_games'].cast<int>();
+    platforms = json['platforms']?.cast<int>();
+    releaseDates = json['release_dates']?.cast<int>();
+    screenshots = json['screenshots']?.cast<int>();
+    similarGames = json['similar_games']?.cast<int>();
     slug = json['slug'];
     summary = json['summary'];
-    tags = json['tags'].cast<int>();
-    themes = json['themes'].cast<int>();
+    tags = json['tags']?.cast<int>();
+    themes = json['themes']?.cast<int>();
     totalRating = json['total'];
     totalRatingCount = json['total_rating_count'];
     checksum = json['checksum'];
     status = json['status'];
-    ageRatings = json['age_ratings'].cast<int>();
-    artworks = json['artworks'].cast<int>();
+    ageRatings = json['age_ratings']?.cast<int>();
+    artworks = json['artworks']?.cast<int>();
   }
 }

@@ -41,9 +41,9 @@ class GamesProvider {
 
     var gamesResponse = await client.games(
       new IGDBRequestParameters(
-        search: 'infamous',
+        search: 'sonic',
         fields: fields,
-        limit: 1,
+        limit: 10,
       ),
     );
 
