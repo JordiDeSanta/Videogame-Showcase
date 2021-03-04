@@ -3,17 +3,10 @@ class Games {
 
   Games();
 
-  Games.fromJsonList({List<dynamic> jsonList, List<dynamic> coverLinkList}) {
+  Games.fromJsonList(List<dynamic> jsonList) {
     if (jsonList == null) return;
 
     for (var item in jsonList) {
-      final game = new Game.fromJsonMap(item);
-      items.add(game);
-    }
-
-    if (coverLinkList == null) return;
-
-    for (var item in coverLinkList) {
       final game = new Game.fromJsonMap(item);
       items.add(game);
     }
@@ -94,7 +87,6 @@ class Game {
     status = json['status'];
     ageRatings = json['age_ratings']?.cast<int>();
     artworks = json['artworks']?.cast<int>();
-    coverLink = json['image_id'];
   }
 
   getImageLink() {
