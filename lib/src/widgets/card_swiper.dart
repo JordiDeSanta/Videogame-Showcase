@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:videogames/src/models/game_model.dart';
+import 'package:videogames/src/providers/games_provider.dart';
 
 class CardSwiperWidget extends StatelessWidget {
   final List<dynamic> games;
@@ -30,6 +30,27 @@ class CardSwiperWidget extends StatelessWidget {
   }
 
   Widget _card(BuildContext context, Game tempGame) {
-    return Text(tempGame.name);
+    final gamesProvider = new GamesProvider();
+
+    return Column(
+      children: [
+        Container(
+            child: FutureBuilder(
+          future: gamesProvider.getImages(tempGame),
+          builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+            if (snapshot.hasData) {
+              return ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Image(
+                    image: NetworkImage(snapshot.data),
+                  ));
+            } else {
+              return Container();
+            }
+          },
+        )),
+        Text(tempGame.name),
+      ],
+    );
   }
 }

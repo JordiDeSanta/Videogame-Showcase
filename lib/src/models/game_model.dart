@@ -15,6 +15,7 @@ class Games {
 
 class Game {
   int id;
+  int cover;
   List<int> ageRatings;
   int category;
   int createdAt;
@@ -38,6 +39,7 @@ class Game {
 
   Game({
     this.id,
+    this.cover,
     this.ageRatings,
     this.category,
     this.createdAt,
@@ -62,6 +64,7 @@ class Game {
 
   Game.fromJsonMap(Map<String, dynamic> json) {
     id = json['id'];
+    cover = json['cover'];
     category = json['category'];
     createdAt = json['created_at'];
     firstReleaseDate = json['first_release_date'];
