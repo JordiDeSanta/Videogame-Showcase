@@ -1,12 +1,25 @@
+import 'package:igdb_client/igdb_client.dart';
+import 'dart:convert';
+
+import 'package:videogames/src/providers/games_provider.dart';
+import 'package:videogames/src/models/cover_model.dart';
+
 class Games {
   List<Game> items = new List();
 
   Games();
 
-  Games.fromJsonList(List<dynamic> jsonList) {
+  Games.fromJsonList(List<dynamic> jsonList, List<dynamic> coverLinkList) {
     if (jsonList == null) return;
 
     for (var item in jsonList) {
+      final game = new Game.fromJsonMap(item);
+      items.add(game);
+    }
+
+    if (coverLinkList == null) return;
+
+    for (var item in coverLinkList) {
       final game = new Game.fromJsonMap(item);
       items.add(game);
     }
@@ -14,6 +27,7 @@ class Games {
 }
 
 class Game {
+  String coverLink;
   int id;
   int cover;
   List<int> ageRatings;
@@ -38,6 +52,7 @@ class Game {
   List<int> artworks;
 
   Game({
+    this.coverLink,
     this.id,
     this.cover,
     this.ageRatings,
@@ -85,5 +100,14 @@ class Game {
     status = json['status'];
     ageRatings = json['age_ratings']?.cast<int>();
     artworks = json['artworks']?.cast<int>();
+    coverLink = json['image_id'];
+  }
+
+  getImageLink() {
+    if (coverLink == null) {
+      return 'https://748073e22e8db794416a-cc51ef6b37841580002827d4d94d19b6.ssl.cf3.rackcdn.com/not-found.png';
+    } else {
+      return 'https://images.igdb.com/igdb/image/upload/t_cover_big/$coverLink.jpg';
+    }
   }
 }

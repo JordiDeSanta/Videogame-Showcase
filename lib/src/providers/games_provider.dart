@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:igdb_client/igdb_client.dart';
-import 'package:videogames/src/models/cover_model.dart';
 
 import 'package:videogames/src/models/game_model.dart';
 
@@ -43,43 +42,26 @@ class GamesProvider {
 
     var gamesResponse = await client.games(
       new IGDBRequestParameters(
-        search: 'Super Mario',
+        ids: [9331],
         fields: fields,
-        limit: 10,
+        limit: 1,
       ),
     );
-
-    final decodedData = json.decode(gamesResponse.toJson());
-
-    final games = new Games.fromJsonList(decodedData['data']);
-
-    return games.items;
-  }
-
-  Future<String> getImages(Game g) async {
-    var token = await IGDBClient.getOauthToken(
-        'd3vjcma7d8t76qzaebvm0jaxo0wgy3', 'wygtzdzqshpkwvpwjm5khea7awdx2j');
-
-    var client = new IGDBClient(
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.192 Safari/537.36',
-        'd3vjcma7d8t76qzaebvm0jaxo0wgy3',
-        token.accessToken,
-        logger: IGDBConsoleLogger());
 
     var imgResponse = await client.covers(
       new IGDBRequestParameters(
-        ids: [g.cover],
+        ids: [9331],
+        fields: ['image_id'],
       ),
     );
 
-    if (imgResponse.error != null) {
-      return 'https://www.westernheights.k12.ok.us/wp-content/uploads/2020/01/No-Photo-Available.jpg';
-    }
+    final decodedDataG = json.decode(gamesResponse.toJson());
+    final decodedDataI = json.decode(imgResponse.toJson());
 
-    final decodedData = json.decode(imgResponse.toJson());
+    final games =
+        new Games.fromJsonList(decodedDataG['data'], decodedDataI['data']);
 
-    final cover = new Cover.fromJsonList(decodedData['data']);
-    return cover.url;
+    return games.items;
   }
 
   printResponse(IGDBResponse resp) {
