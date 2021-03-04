@@ -42,24 +42,32 @@ class GamesProvider {
 
     var gamesResponse = await client.games(
       new IGDBRequestParameters(
-        ids: [9331],
+        ids: [70],
         fields: fields,
         limit: 1,
       ),
     );
 
+    final decodedDataG = json.decode(gamesResponse.toJson());
+    final preGames = new Games.fromJsonList(jsonList: decodedDataG['data']);
+
+    List<int> ids;
+    for (var g in preGames.items) {
+      if (g != null) {
+        ids.add(g.id);
+      }
+    }
     var imgResponse = await client.covers(
       new IGDBRequestParameters(
-        ids: [9331],
+        ids: ids,
         fields: ['image_id'],
       ),
     );
 
-    final decodedDataG = json.decode(gamesResponse.toJson());
     final decodedDataI = json.decode(imgResponse.toJson());
 
-    final games =
-        new Games.fromJsonList(decodedDataG['data'], decodedDataI['data']);
+    final games = new Games.fromJsonList(
+        jsonList: decodedDataG['data'], coverLinkList: decodedDataI['data']);
 
     return games.items;
   }

@@ -9,7 +9,7 @@ class Games {
 
   Games();
 
-  Games.fromJsonList(List<dynamic> jsonList, List<dynamic> coverLinkList) {
+  Games.fromJsonList({List<dynamic> jsonList, List<dynamic> coverLinkList}) {
     if (jsonList == null) return;
 
     for (var item in jsonList) {
