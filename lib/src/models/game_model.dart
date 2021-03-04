@@ -1,9 +1,3 @@
-import 'package:igdb_client/igdb_client.dart';
-import 'dart:convert';
-
-import 'package:videogames/src/providers/games_provider.dart';
-import 'package:videogames/src/models/cover_model.dart';
-
 class Games {
   List<Game> items = new List();
 

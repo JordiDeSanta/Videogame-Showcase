@@ -51,12 +51,11 @@ class GamesProvider {
     final decodedDataG = json.decode(gamesResponse.toJson());
     final preGames = new Games.fromJsonList(jsonList: decodedDataG['data']);
 
-    List<int> ids;
-    for (var g in preGames.items) {
-      if (g != null) {
-        ids.add(g.id);
-      }
-    }
+    List<int> ids = [];
+    preGames.items.forEach((e) {
+      ids?.add(e.cover);
+    });
+
     var imgResponse = await client.covers(
       new IGDBRequestParameters(
         ids: ids,
