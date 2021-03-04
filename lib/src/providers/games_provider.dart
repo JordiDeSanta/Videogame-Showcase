@@ -42,9 +42,9 @@ class GamesProvider {
 
     var gamesResponse = await client.games(
       new IGDBRequestParameters(
-        ids: [70],
+        search: 'Mario',
         fields: fields,
-        limit: 1,
+        limit: 5,
       ),
     );
 

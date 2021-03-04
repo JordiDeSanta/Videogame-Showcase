@@ -32,6 +32,7 @@ class CardSwiperWidget extends StatelessWidget {
     return Column(
       children: [
         Container(
+          height: double.infinity,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(20.0),
             child: FadeInImage(
